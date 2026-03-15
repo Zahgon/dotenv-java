@@ -74,6 +74,8 @@ value"
 
 
 ```java
+import io.github.cdimascio.dotenv.Dotenv;
+
 Dotenv dotenv = Dotenv.load();
 dotenv.get("MY_ENV_VAR1")
 ```
