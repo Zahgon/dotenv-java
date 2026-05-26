@@ -92,3 +92,8 @@ buildNumber.properties
 /sav
 .coveralls.yml
 .DS_Store
+
+.aider*
+logs/
+.commit0_scripts/
+.github/workflows/

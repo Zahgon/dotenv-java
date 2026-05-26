@@ -1,7 +1,6 @@
 package io.github.cdimascio.dotenv.internal;
 
 import io.github.cdimascio.dotenv.DotenvException;
-
 import java.io.IOException;
 import java.net.URI;
 import java.nio.file.FileSystems;
@@ -15,7 +14,9 @@ import java.util.stream.Collectors;
  * (Internal) Reads a .env file
  */
 public class DotenvReader {
+
     private final String directory;
+
     private final String filename;
 
     /**
@@ -35,32 +36,6 @@ public class DotenvReader {
      * @throws IOException if an I/O error occurs
      */
     public List<String> read() throws DotenvException, IOException {
-        String dir = directory
-            .replaceAll("\\\\", "/")
-            .replaceFirst("\\.env$", "")
-            .replaceFirst("/$", "");
-
-        String location = dir + "/" + filename;
-        String lowerLocation = location.toLowerCase();
-        Path path = (
-            lowerLocation.startsWith("file:")
-                || lowerLocation.startsWith("android.resource:")
-                || lowerLocation.startsWith("jimfs:")
-        ) ? Paths.get(URI.create(location)) : Paths.get(location);
-
-        if (Files.exists(path)) {
-            return Files.readAllLines(path);
-        }
-
-        try {
-            return ClasspathHelper
-                .loadFileFromClasspath(location.replaceFirst("^\\./", "/"))
-                .collect(Collectors.toList());
-        } catch (DotenvException e) {
-            Path cwd = FileSystems.getDefault().getPath(".").toAbsolutePath().normalize();
-            String cwdMessage = !path.isAbsolute() ? "(working directory: " + cwd + ")" : "";
-            e.addSuppressed(new DotenvException("Could not find " + path + " on the file system " + cwdMessage));
-            throw e;
-        }
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

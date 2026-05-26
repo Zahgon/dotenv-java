@@ -2,9 +2,7 @@ package io.github.cdimascio.dotenv;
 
 import io.github.cdimascio.dotenv.internal.DotenvParser;
 import io.github.cdimascio.dotenv.internal.DotenvReader;
-
 import java.util.*;
-
 import static java.util.stream.Collectors.*;
 
 /**
@@ -12,10 +10,15 @@ import static java.util.stream.Collectors.*;
  * @see Dotenv#configure()
  */
 public class DotenvBuilder {
+
     private String filename = ".env";
+
     private String directoryPath = "./";
+
     private boolean systemProperties = false;
+
     private boolean throwIfMissing = true;
+
     private boolean throwIfMalformed = true;
 
     /**
@@ -24,17 +27,16 @@ public class DotenvBuilder {
      * @return this {@link DotenvBuilder}
      */
     public DotenvBuilder directory(final String path) {
-        this.directoryPath = path;
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
+
     /**
      * Sets the name of the .env file. The default is .env.
      * @param name the filename
      * @return this {@link DotenvBuilder}
      */
     public DotenvBuilder filename(final String name) {
-        filename = name;
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -42,8 +44,7 @@ public class DotenvBuilder {
      * @return this {@link DotenvBuilder}
      */
     public DotenvBuilder ignoreIfMissing() {
-        throwIfMissing = false;
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -51,8 +52,7 @@ public class DotenvBuilder {
      * @return this {@link DotenvBuilder}
      */
     public DotenvBuilder ignoreIfMalformed() {
-        throwIfMalformed = false;
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -60,8 +60,7 @@ public class DotenvBuilder {
      * @return this {@link DotenvBuilder}
      */
     public DotenvBuilder systemProperties() {
-        systemProperties = true;
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -70,63 +69,43 @@ public class DotenvBuilder {
      * @throws DotenvException when an error occurs
      */
     public Dotenv load() throws DotenvException {
-        final var reader = new DotenvParser(
-                                new DotenvReader(directoryPath, filename),
-                                throwIfMissing, throwIfMalformed);
-        final List<DotenvEntry> env = reader.parse();
-        if (systemProperties) {
-            env.forEach(it -> System.setProperty(it.getKey(), it.getValue()));
-        }
-
-        return new DotenvImpl(env);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     static class DotenvImpl implements Dotenv {
-        private final Map<String, String> envVars;
-        private final Set<DotenvEntry> set;
-        private final Set<DotenvEntry> setInFile;
-        public DotenvImpl(final List<DotenvEntry> envVars) {
-            final Map<String, String> envVarsInFile =
-                envVars.stream()
-                       .collect(toMap(DotenvEntry::getKey, DotenvEntry::getValue, (a, b) -> b));
 
+        private final Map<String, String> envVars;
+
+        private final Set<DotenvEntry> set;
+
+        private final Set<DotenvEntry> setInFile;
+
+        public DotenvImpl(final List<DotenvEntry> envVars) {
+            final Map<String, String> envVarsInFile = envVars.stream().collect(toMap(DotenvEntry::getKey, DotenvEntry::getValue, (a, b) -> b));
             this.envVars = new HashMap<>(envVarsInFile);
             this.envVars.putAll(System.getenv());
-
-            this.set =
-                this.envVars.entrySet()
-                            .stream()
-                            .map(it -> new DotenvEntry(it.getKey(), it.getValue()))
-                            .collect(collectingAndThen(toSet(), Collections::unmodifiableSet));
-
-            this.setInFile =
-                envVarsInFile.entrySet()
-                             .stream()
-                             .map(it -> new DotenvEntry(it.getKey(), it.getValue()))
-                             .collect(collectingAndThen(toSet(), Collections::unmodifiableSet));
+            this.set = this.envVars.entrySet().stream().map(it -> new DotenvEntry(it.getKey(), it.getValue())).collect(collectingAndThen(toSet(), Collections::unmodifiableSet));
+            this.setInFile = envVarsInFile.entrySet().stream().map(it -> new DotenvEntry(it.getKey(), it.getValue())).collect(collectingAndThen(toSet(), Collections::unmodifiableSet));
         }
 
         @Override
         public Set<DotenvEntry> entries() {
-            return set;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         @Override
         public Set<DotenvEntry> entries(final Dotenv.Filter filter) {
-            return filter == null ? entries() : setInFile;
-
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         @Override
         public String get(final String key) {
-            final String value = System.getenv(key);
-            return value == null ? envVars.get(key) : value;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         @Override
         public String get(String key, String defaultValue) {
-            final String value = this.get(key);
-            return value == null ? defaultValue : value;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
     }
 }

@@ -6,6 +6,7 @@ package io.github.cdimascio.dotenv;
 public class DotenvEntry {
 
     private final String key;
+
     private final String value;
 
     /**
@@ -23,7 +24,7 @@ public class DotenvEntry {
      * @return the key for the {@link DotenvEntry}
      */
     public String getKey() {
-        return key;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -31,12 +32,11 @@ public class DotenvEntry {
      * @return the value for the {@link DotenvEntry}
      */
     public String getValue() {
-        return value;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public String toString() {
-        return key+"="+value;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }
-

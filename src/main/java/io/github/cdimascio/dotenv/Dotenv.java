@@ -16,6 +16,7 @@ public interface Dotenv {
      * A dotenv entry filter
      */
     enum Filter {
+
         /**
          * Filter matching only environment variables declared in the .env file
          */
@@ -27,7 +28,7 @@ public interface Dotenv {
      * @return a new {@link Dotenv} instance
      */
     static DotenvBuilder configure() {
-        return new DotenvBuilder();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -35,7 +36,7 @@ public interface Dotenv {
      * @return a new {@link Dotenv} instance
      */
     static Dotenv load() {
-        return new DotenvBuilder().load();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
